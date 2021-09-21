@@ -53,7 +53,6 @@ function askQuestionSet() {
             },
         ])
         .then((data) => {
-            console.log(data);
             const fileName = data.file;
             fs.writeFile(fileName,
 `<!DOCTYPE html>
@@ -77,14 +76,49 @@ function askQuestionSet() {
 
     <!-- <script src="ENTER SCRIPT URL HERE"></script> -->
 </body>
-</html>`, (err) => err ? console.error(err) : console.log("Thank you! Your HTML file has been generated successfully."))
+</html>`, (error) => {
+    if(error) {
+        console.log(error)
+    }
+    respondSuccess();
+})
+
+    function respondSuccess() {
+        console.log("Thank you! Your HTML file has been generated successfully.");
+        askNew();
+    }
+
+    function askNew() {
+        inquirer
+            .prompt(
+                {
+                    type: 'list',
+                    message: 'Would you like to create another page?',
+                    name: 'new',
+                    choices: ['Yes', 'No']
+                },
+            )
+            .then((answer) => {
+                if(answer.new === 'Yes') {
+                    askConfirmation();
+                }
+                return;
+            })
+            .catch((error) => {
+                if (error) {
+                    console.log(error)
+                }
+            });
+    }
 
     })
         .catch((error) => {
             if (error.isTtyError) {
             console.log('The prompt could not be rendered.')
+            return;
             } else {
-            console.log('Error: Please exit the CLI and begin again.')
+            console.log('Error: Please try again.')
+            return;
             }
         });
 }
