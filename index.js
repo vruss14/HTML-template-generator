@@ -8,7 +8,7 @@ function askConfirmation() {
         .prompt(
             {
                 type: 'list',
-                message: 'This command-line interface will assist you in preparing an HTML page with relevant meta tags for SEO. Are you ready to proceed?',
+                message: '\n\nThis command-line interface will assist you in preparing an HTML page with relevant meta tags for SEO. Are you ready to proceed?',
                 name: 'confirmation',
                 choices: ['Yes', 'No']
             },
@@ -21,9 +21,9 @@ function askConfirmation() {
         })
         .catch((error) => {
             if (error.isTtyError) {
-            console.log('The prompt could not be rendered.')
+            console.log('\n\nThe prompt could not be rendered.')
             } else {
-            console.log('Error: Please exit the CLI and begin again.')
+            console.log('\n\nError: Please exit the CLI and begin again.')
             }
         });
 }
@@ -33,22 +33,22 @@ function askQuestionSet() {
         .prompt([
             {
                 type: 'input',
-                message: 'What is the title of your webpage? If you can, try to include one of your keywords since your title will be used frequently by search engines.',
+                message: '\n\nWhat is the title of your webpage? If you can, try to include one of your keywords since your title will be used frequently by search engines.',
                 name: 'title',
             },
             {
                 type: 'input',
-                message: 'How would you describe your webpage?',
+                message: '\n\nHow would you describe your webpage?',
                 name: 'description',
             },
             {
                 type: 'input',
-                message: 'Who is the author of the webpage?',
+                message: '\n\nWho is the author of the webpage?',
                 name: 'author',
             },
             {
                 type: 'input',
-                message: 'What should the name of the file be?',
+                message: '\n\nWhat should the name of the file be?',
                 name: 'file',
             },
         ])
@@ -84,7 +84,7 @@ function askQuestionSet() {
 })
 
     function respondSuccess() {
-        console.log("Thank you! Your HTML file has been generated successfully.");
+        console.log("\n\nThank you! Your HTML file has been generated successfully.");
         askNew();
     }
 
@@ -93,7 +93,7 @@ function askQuestionSet() {
             .prompt(
                 {
                     type: 'list',
-                    message: 'Would you like to create another page?',
+                    message: '\n\nWould you like to create another page?',
                     name: 'new',
                     choices: ['Yes', 'No']
                 },
@@ -114,10 +114,10 @@ function askQuestionSet() {
     })
         .catch((error) => {
             if (error.isTtyError) {
-            console.log('The prompt could not be rendered.')
+            console.log('\n\nThe prompt could not be rendered.')
             return;
             } else {
-            console.log('Error: Please try again.')
+            console.log('\n\nError: Please try again.')
             return;
             }
         });
