@@ -1,5 +1,5 @@
 {
-  "name": "HTML-template-generator",
+  "name": "html-template-generator",
   "version": "1.0.0",
   "description": "A CLI solution for generating HTML templates with important meta tags for SEO.",
   "main": "index.js",
