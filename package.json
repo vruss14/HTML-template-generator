@@ -1,0 +1,23 @@
+{
+  "name": "HTML-template-generator",
+  "version": "1.0.0",
+  "description": "A CLI solution for generating HTML templates with important meta tags for SEO.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vruss14/HTML-template-generator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vruss14/HTML-template-generator/issues"
+  },
+  "homepage": "https://github.com/vruss14/HTML-template-generator#readme",
+  "dependencies": {
+    "inquirer": "^8.1.5"
+  }
+}
