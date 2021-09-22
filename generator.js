@@ -1,5 +1,8 @@
 const inquirer = require('inquirer');
 
+// The confirm function/method resolves if the user confirms that they are ready to proceed
+// A list is used in inquirer to use a choices array with set options
+
 const confirm = function () {
 
   return new Promise((resolve, reject) => {
@@ -27,6 +30,8 @@ const confirm = function () {
   })
 }
 
+// This is the main questions object for the application; collects relevant data for page generation
+// Resolves if the data is truthy
 
 const questions = function () {
 
@@ -70,6 +75,9 @@ const questions = function () {
   })
 }
 
+// The create function/method in the generator asks whether the user would like
+// to create another page, and resolves if the user answers 'Yes'
+
 const create = function () {
 
   return new Promise((resolve, reject) => {
@@ -96,6 +104,8 @@ const create = function () {
         });
   })
 }
+
+// Modularization for the three methods of the generator file
 
 module.exports = {
   confirm,

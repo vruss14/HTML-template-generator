@@ -1,8 +1,15 @@
 const fs = require('fs');
-const inquirer = require('inquirer');
 const generator = require('./generator.js');
 
+// Add error proofing
+// Add even more helpful things in the HTML doc line by line
+// Consider adding HTML checklist commented in the generated document
+// Write Jest tests to test each function
+
 confirmRequest();
+
+// Uses inquirer to determine if the user wishes to proceed
+// Only proceeds if the response from the generator is 'Yes'
 
 function confirmRequest() {
     generator.confirm().then((answer) => {
@@ -13,6 +20,9 @@ function confirmRequest() {
     })
 }
 
+// Uses the set of questions from the generator and takes the responses
+// If the responses exist, then the generatePage function is called with the responses as an argument
+
 function askQuestions() {
     generator.questions().then((responses) => {
         if(responses) {
@@ -21,6 +31,9 @@ function askQuestions() {
         return;
     })        
 }
+
+// The generatePage function accepts an answer parameter and uses the answer object to pull relevant data
+// to ultimately generate an SEO-friendly HTML document
 
 function generatePage(answer) {
     const fileName = answer.file;
@@ -57,18 +70,22 @@ function generatePage(answer) {
         })
 }
 
+// If there was no error in the generatePage function, respondSuccess logs a successful message in the console
+// and calls a function that asks whether the user wants to create another new page
+
 function respondSuccess() {
     console.log("\n\nThank you! Your HTML file has been generated successfully.");
     askNew();
 }
 
-function askNew() {
+// askNew uses the generator.create method to ask whether the user wants to create another page
+// confirmRequest is called again only if the generator.create method returns and resolves with 'Yes'
 
+function askNew() {
     generator.create().then((answer) => {
         if(answer === 'Yes') {
             confirmRequest();
         }
         return;
     })
-
 }
