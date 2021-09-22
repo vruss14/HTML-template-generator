@@ -1,7 +1,6 @@
 const fs = require('fs');
 const generator = require('./generator.js');
 
-// Add error proofing
 // Add even more helpful things in the HTML doc line by line
 // Consider adding HTML checklist commented in the generated document
 // Write Jest tests to test each function
@@ -64,7 +63,8 @@ function generatePage(answer) {
 
 </html>`, (error) => {
             if(error) {
-                console.log(error)
+                console.log(error);
+                return;
             }
             respondSuccess();
         })

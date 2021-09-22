@@ -46,7 +46,7 @@ const questions = function () {
               },
               {
                   type: 'input',
-                  message: '\n\nHow would you describe your webpage?',
+                  message: '\n\nHow would you describe your webpage in 1–3 sentences?',
                   name: 'description',
               },
               {
@@ -56,12 +56,29 @@ const questions = function () {
               },
               {
                   type: 'input',
-                  message: '\n\nWhat should the name of the file be?',
+                  message: '\n\nWhat should the name of the file be (e.g. index.html)?',
                   name: 'file',
               },
           ])
           .then((data) => {
             if (data) {
+
+              // Validate each response in the data object to ensure no blank responses
+              
+              for (const response in data) {
+                if(data[response] === "") {
+                  console.log('\nError: At least one of your responses was blank. Please try again.\n');
+                  return;
+                }
+              }
+
+              // Validate that the user has entered the correct file extension (.html)
+
+              if(data.file.substring(5, data.file.length) !== '.html') {
+                console.log('\nError: You need to specify an HTML file name, including the correct extension (e.g. index.html). Please try again.\n');
+                return;
+              }
+              
               return resolve(data)
             }
             return;
