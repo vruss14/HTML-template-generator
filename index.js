@@ -1,8 +1,6 @@
 const fs = require('fs');
 const generator = require('./generator.js');
 
-// Add even more helpful things in the HTML doc line by line
-// Consider adding HTML checklist commented in the generated document
 // Write Jest tests to test each function
 
 confirmRequest();
@@ -25,8 +23,45 @@ function confirmRequest() {
 function askQuestions() {
     generator.questions().then((responses) => {
         if(responses) {
+
+            // If responses is truthy, then translate responses.english that to a properly formatted HTML lang attribute
+
+            switch (responses.english) {
+                case 'United States of America':
+                    responses.lang = 'en-US'
+                    break;
+    
+                case 'Great Britain':
+                    responses.lang = 'en-GB'
+                    break;
+    
+                case 'Canada':
+                    responses.lang = 'en-CA'
+                    break;
+    
+                case 'Australia':
+                    responses.lang = 'en-AU'
+                    break;
+    
+                case 'South Africa':
+                    responses.lang = 'en-ZA'
+                    break;
+    
+                case 'New Zealand':
+                    responses.lang = 'en-NZ'
+                    break;
+    
+                case 'Ireland':
+                    responses.lang = 'en-IE'
+                    break;
+    
+                default:
+                    responses.lang = 'en'
+                    break;
+            }
             generatePage(responses);
         }
+
         return;
     })        
 }
@@ -39,7 +74,19 @@ function generatePage(answer) {
     fs.writeFile(fileName,
 
 `<!DOCTYPE html>
-<html lang="en">
+
+<!-- HTML CHECKLIST FOR SEO; DELETE EACH COMMENT WHEN YOUR RESPONSE IS 'TRUE' -->
+<!-- The title of my page would make a relevant, succinct headline for search engines to use. -->
+<!-- The meta description of my page would make a good snippet/summary for search engines to use.  -->
+<!-- The meta author of my page is correct. -->
+<!-- All of my external resources (CSS, JavaScript, custom fonts, etc.) are connected successfully to my page. -->
+<!-- My heading tags are organized in a hierarchial way (e.g. only 1 H1, a few H2, H3 within H2, etc.) -->
+<!-- All of my images have alt attributes with an accurate description of each picture. -->
+<!-- I'm using semantic HTML tags wherever possible instead of divs (e.g. header, nav, main, article, section, footer). -->
+<!-- A computer could read my HTML page and understand it very well. -->
+
+<html lang="${answer.lang}">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

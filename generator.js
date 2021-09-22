@@ -41,7 +41,7 @@ const questions = function () {
           .prompt([
               {
                   type: 'input',
-                  message: '\n\nWhat is the title of your webpage? If you can, try to include one of your keywords since your title will be used frequently by search engines.',
+                  message: '\n\nWhat is the title of your webpage? Try to include one of your keywords, and keep the title under 60 characters.',
                   name: 'title',
               },
               {
@@ -55,6 +55,12 @@ const questions = function () {
                   name: 'author',
               },
               {
+                type: 'list',
+                message: '\n\nWhat dialect of English is the page written in?',
+                name: 'english',
+                choices: ['United States of America', 'Great Britain', 'Canada', 'Australia', 'South Africa', 'New Zealand', 'Ireland']
+              },
+              {
                   type: 'input',
                   message: '\n\nWhat should the name of the file be (e.g. index.html)?',
                   name: 'file',
@@ -64,7 +70,7 @@ const questions = function () {
             if (data) {
 
               // Validate each response in the data object to ensure no blank responses
-              
+
               for (const response in data) {
                 if(data[response] === "") {
                   console.log('\nError: At least one of your responses was blank. Please try again.\n');
@@ -74,10 +80,12 @@ const questions = function () {
 
               // Validate that the user has entered the correct file extension (.html)
 
-              if(data.file.substring(5, data.file.length) !== '.html') {
+              if(data.file.slice(-5) !== '.html') {
                 console.log('\nError: You need to specify an HTML file name, including the correct extension (e.g. index.html). Please try again.\n');
                 return;
               }
+
+
               
               return resolve(data)
             }
