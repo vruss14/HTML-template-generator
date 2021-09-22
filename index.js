@@ -18,52 +18,56 @@ function confirmRequest() {
 }
 
 // Uses the set of questions from the generator and takes the responses
-// If the responses exist, then the generatePage function is called with the responses as an argument
+// If the responses exist, then it will call specifyLang with responses as an argument
 
 function askQuestions() {
     generator.questions().then((responses) => {
         if(responses) {
-
-            // If responses is truthy, then translate responses.english that to a properly formatted HTML lang attribute
-
-            switch (responses.english) {
-                case 'United States of America':
-                    responses.lang = 'en-US'
-                    break;
-    
-                case 'Great Britain':
-                    responses.lang = 'en-GB'
-                    break;
-    
-                case 'Canada':
-                    responses.lang = 'en-CA'
-                    break;
-    
-                case 'Australia':
-                    responses.lang = 'en-AU'
-                    break;
-    
-                case 'South Africa':
-                    responses.lang = 'en-ZA'
-                    break;
-    
-                case 'New Zealand':
-                    responses.lang = 'en-NZ'
-                    break;
-    
-                case 'Ireland':
-                    responses.lang = 'en-IE'
-                    break;
-    
-                default:
-                    responses.lang = 'en'
-                    break;
-            }
-            generatePage(responses);
+            specifyLang(responses);
         }
-
         return;
-    })        
+    })
+}
+
+// Translates the user's response into a properly formatted HTML lang attribute
+// Then calls the generatePage function
+
+function specifyLang(responses) {
+
+    switch (responses.english) {
+        case 'United States of America':
+            responses.lang = 'en-US'
+            break;
+
+        case 'Great Britain':
+            responses.lang = 'en-GB'
+            break;
+
+        case 'Canada':
+            responses.lang = 'en-CA'
+            break;
+
+        case 'Australia':
+            responses.lang = 'en-AU'
+            break;
+
+        case 'South Africa':
+            responses.lang = 'en-ZA'
+            break;
+
+        case 'New Zealand':
+            responses.lang = 'en-NZ'
+            break;
+
+        case 'Ireland':
+            responses.lang = 'en-IE'
+            break;
+
+        default:
+            responses.lang = 'en'
+            break;
+    }
+    generatePage(responses)
 }
 
 // The generatePage function accepts an answer parameter and uses the answer object to pull relevant data

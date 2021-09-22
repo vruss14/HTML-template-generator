@@ -84,9 +84,6 @@ const questions = function () {
                 console.log('\nError: You need to specify an HTML file name, including the correct extension (e.g. index.html). Please try again.\n');
                 return;
               }
-
-
-              
               return resolve(data)
             }
             return;
